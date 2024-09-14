@@ -32,8 +32,8 @@ export default function HomePage() {
               placeholder="Enter your email"
               className="flex-1 outline-none text-black px-2 py-1"
             />
-            <button className="py-[6px] px-[22px] bg-[#74B700] rounded-full font-semibold">
-              Join the Waitlist
+            <button className="py-[2px] lg:py-[6px] px-[10px] lg:px-[22px] bg-[#74B700] rounded-full font-semibold">
+              Join Waitlist
             </button>
           </div>
         </div>
