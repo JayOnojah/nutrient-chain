@@ -16,11 +16,11 @@ export default function HomePage() {
         <div className="text-white">
           <div>
             <div
-              className={`${bebasNeue.className} antialiased text-[24px] sm:text-[32px] lg:text-[70px]  max-w-[700px] leading-none`}>
+              className={`${bebasNeue.className} antialiased text-[35px] lg:text-[70px]  max-w-[700px] leading-none tracking-tight word-spacing`}>
               RE-THINKING AGRICULTURE WITHOUT BOUNDARIES IN AFRICA
             </div>
           </div>
-          <div className="max-w-[600px] mt-2 text-[18px]">
+          <div className="max-w-[600px] mt-2 text-[16px] lg:text-[18px] leading-none">
             Harnessing the power of blockchain to break barrier in African
             agriculture, empowering farmers, investors, and communities for a
             prosperous future.

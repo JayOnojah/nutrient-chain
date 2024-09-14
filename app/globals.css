@@ -96,3 +96,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.word-spacing {
+  word-spacing: 2px;
+}
