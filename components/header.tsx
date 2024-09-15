@@ -12,7 +12,7 @@ const Header = () => {
         <div className="hidden lg:block text-[14px] text-white cursor-pointer">
           Contact Us
         </div>
-        <button className="py-[6px] text-xs lg:text-sm px-3 md:px-[22px] bg-[#74B700] rounded-full font-semibold">
+        <button className="py-[6px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full">
           Join the Waitlist
         </button>
       </div>
