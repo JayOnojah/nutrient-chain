@@ -21,8 +21,8 @@ export default function HomePage() {
             </div>
           </div>
           <div className="max-w-[700px] mt-2 text-[14px] lg:text-[16px] tracking-tighter word-spacing">
-            A Unified Digital ecosystem Harnessing the power of FinTech and
-            Blockchain to break barrier in African agriculture, empowering
+            A Unified Digital ecosystem harnessing the power of FinTech and
+            Blockchain to break barriers in African agriculture, empowering
             farmers, investors, and communities for a prosperous future.
           </div>
 
@@ -32,8 +32,8 @@ export default function HomePage() {
               placeholder="Enter your email"
               className="flex-1 outline-none text-black px-2 py-1"
             />
-            <button className="py-[2px] lg:py-[6px] px-[10px] lg:px-[22px] bg-[#74B700] rounded-full">
-              Join Waitlist
+            <button className="py-[2px] lg:py-[6px] px-[10px] lg:px-[22px] bg-[#74B700] rounded-full text-[12px] lg:text-[14px]">
+              Join the Waitlist
             </button>
           </div>
         </div>
