@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NutrientChain: The SuperApp for Smart Farmers",
+  title: "NutrientChain: The SuperApp for Farmers",
   description: "Re-thinking Agriculture without Boundaries in Africa",
 };
 
