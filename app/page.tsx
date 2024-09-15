@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <Fragment>
       <Header />
-      <div className="bg relative min-h-screen w-full max-w-[1400px] mx-auto px-6 xl:px-12 py-5 flex items-center">
+      <div className="bg relative min-h-screen w-full mx-auto px-6 xl:px-12 py-5 flex items-center">
         <div className="text-white">
           <div>
             <div
@@ -26,7 +26,7 @@ export default function HomePage() {
             farmers, investors, and communities for a prosperous future.
           </div>
 
-          <div className="max-w-[400px] mt-[50px] flex justify-between bg-white w-full pl-4 p-1.5 rounded-full">
+          <div className="max-w-[450px] mt-[50px] flex justify-between bg-white w-full pl-4 p-1.5 rounded-full">
             <input
               type="text"
               placeholder="Enter your email"
