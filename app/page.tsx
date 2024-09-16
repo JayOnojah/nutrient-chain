@@ -88,7 +88,7 @@ const HomePage = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`py-[2px] lg:py-[6px] px-[10px] lg:px-[22px] rounded-full text-[12px] lg:text-[14px] max-w-[40%] block ${
+              className={`py-[2px] lg:py-[6px] px-[10px] lg:px-[22px] rounded-full text-[12px] lg:text-[14px] max-w-[40%] block hover:bg-[#496912] ${
                 loading ? "bg-[#496912]" : "bg-[#74B700]"
               }`}>
               {loading ? "Processing..." : "Join Waitlist"}{" "}

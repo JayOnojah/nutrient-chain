@@ -13,7 +13,7 @@ const Header = () => {
         <Socials />
         <a
           href="mailto:hi@nutrientchain.com"
-          className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full">
+          className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full hover:bg-[#496912]">
           Contact Us
         </a>
       </div>
