@@ -15,7 +15,7 @@ const bebasNeue = Bebas_Neue({
 
 const HomePage = () => {
   const [email, setEmail] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false); // Loading state
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -23,7 +23,7 @@ const HomePage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when submitting
+    setLoading(true);
 
     const response = await fetch(
       "https://api.sheetmonkey.io/form/6HEBpMVkkNCqWcun1SJQrK",
