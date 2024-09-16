@@ -1,4 +1,9 @@
+"use client";
+
 import { Fragment } from "react";
+import React, { useState } from "react";
+
+import { toast } from "sonner";
 import Header from "@/components/header";
 
 import { Bebas_Neue } from "next/font/google";
@@ -8,7 +13,49 @@ const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
 });
 
-export default function HomePage() {
+const HomePage = () => {
+  const [email, setEmail] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false); // Loading state
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true); // Set loading to true when submitting
+
+    const response = await fetch(
+      "https://api.sheetmonkey.io/form/6HEBpMVkkNCqWcun1SJQrK",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      }
+    );
+
+    if (response.ok) {
+      toast.success("Email successfully added to Waitlist", {
+        action: {
+          label: "Close",
+          onClick: () => toast.dismiss(),
+        },
+      });
+      setEmail("");
+    } else {
+      toast.error("Error adding email to Waitlist", {
+        action: {
+          label: "Close",
+          onClick: () => toast.dismiss(),
+        },
+      });
+    }
+
+    setLoading(false);
+  };
+
   return (
     <Fragment>
       <Header />
@@ -21,23 +68,36 @@ export default function HomePage() {
             </div>
           </div>
           <div className="max-w-[700px] mt-2 text-[14px] lg:text-[16px] tracking-tighter word-spacing">
-            A Unified Digital ecosystem harnessing the power of FinTech and
+            A unified digital ecosystem harnessing the power of FinTech and
             Blockchain to break barriers in African agriculture, empowering
             farmers, investors, and communities for a prosperous future.
           </div>
 
-          <div className="max-w-[450px] mt-[50px] flex justify-between bg-white w-full pl-4 p-1.5 rounded-full">
+          <form
+            onSubmit={handleSubmit}
+            className="max-w-[450px] mt-[50px] flex justify-between bg-white w-full pl-4 p-1.5 rounded-full">
             <input
-              type="text"
+              required
+              onChange={handleChange}
+              name="email"
+              type="email"
+              value={email}
               placeholder="Enter your email"
-              className="flex-1 outline-none text-black px-2 py-1 max-w-[200px]"
+              className="flex-1 outline-none text-black px-2 py-1 max-w-[60%] block"
             />
-            <button className="py-[2px] lg:py-[6px] px-[10px] lg:px-[22px] bg-[#74B700] rounded-full text-[12px] lg:text-[14px] max-w-[150px] block">
-              Join Waitlist
+            <button
+              type="submit"
+              disabled={loading}
+              className={`py-[2px] lg:py-[6px] px-[10px] lg:px-[22px] rounded-full text-[12px] lg:text-[14px] max-w-[40%] block ${
+                loading ? "bg-[#496912]" : "bg-[#74B700]"
+              }`}>
+              {loading ? "Processing..." : "Join Waitlist"}{" "}
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </Fragment>
   );
-}
+};
+
+export default HomePage;

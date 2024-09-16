@@ -1,6 +1,7 @@
 import React from "react";
 
 import Image from "next/image";
+import Socials from "./socials";
 import logo from "@/public/images/logo.png";
 
 const Header = () => {
@@ -9,12 +10,12 @@ const Header = () => {
       <Image src={logo} alt="NutrientChain Logo" className="w-44 lg:w-[64]" />
 
       <div className="flex items-center gap-4 xl:gap-[40px]">
-        <div className="hidden lg:block text-[14px] text-white cursor-pointer">
+        <Socials />
+        <a
+          href="mailto:hi@nutrientchain.com"
+          className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full">
           Contact Us
-        </div>
-        <button className="py-[6px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full">
-          Join the Waitlist
-        </button>
+        </a>
       </div>
     </div>
   );
