@@ -24,7 +24,7 @@ const icons = [
 
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/company/nutrient-chain/",
+    href: "https://www.linkedin.com/company/nutrientchain",
     icon: (props: any) => (
       <svg fill="currentColor" viewBox="0 0 23 23" {...props}>
         <path
