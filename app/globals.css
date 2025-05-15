@@ -15,8 +15,8 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  /* color: var(--foreground); */
+  /* background: var(--background); */
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -92,10 +92,14 @@ body {
 }
 
 .bg {
-  background: url(../public/images/bg-min.png);
+  background: url(../public/images/pngs/bg-2.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+.app-width {
+  @apply max-w-[1216px] mx-auto px-5
 }
 
 .word-spacing {
