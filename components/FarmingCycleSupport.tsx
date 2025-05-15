@@ -8,6 +8,7 @@ interface FarmingStepProps {
   description?: string;
   isLast?: boolean;
   isActive?: boolean;
+  isPassed?: boolean;
   id: string;
 }
 
@@ -16,15 +17,22 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
   description, 
   isLast = false,
   isActive = false,
+  isPassed = false,
   id
 }) => {
   const stepRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     if (stepRef.current) {
       if (isActive) {
         gsap.to(stepRef.current, {
           opacity: 1,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      } else if (isPassed) {
+        gsap.to(stepRef.current, {
+          opacity: 0.9,
           duration: 0.3,
           ease: "power2.out"
         });
@@ -36,26 +44,26 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
         });
       }
     }
-  }, [isActive]);
+  }, [isActive, isPassed]);
 
   return (
     <div ref={stepRef} id={id} className="relative pl-6 pb-5">
       {/* Timeline vertical line */}
-      <div className={`absolute left-0 top-0 bottom-0 w-1 ${isActive ? 'bg-lime-600' : 'bg-lime-400/5'}`}>
+      <div className={`absolute left-0 top-0 bottom-0 w-1 ${isActive || isPassed ? 'bg-lime-600' : 'bg-lime-400/5'}`}>
         {/* This ensures the line stops at the last item */}
         {isLast && <div className="absolute bottom-0 w-full h-1/2 bg-[#1a3409]"></div>}
       </div>
       
-      {/* Centered ball at the end of active item */}
-      {isActive && (
+      {/* Centered ball at the end of ONLY the currently active item */}
+      {isActive && !isPassed && (
         <div className="absolute left-[-1.8px] bottom-[-4px] w-[9px] h-[9px] rounded-full bg-lime-600"></div>
       )}
       
-      <h3 className={`font-medium mb-1 ${isActive ? 'text-lime-500 font-semibold' : 'text-lime-400/90'}`}>
+      <h3 className={`font-medium mb-1 ${isActive || isPassed ? 'text-lime-500 font-semibold' : 'text-lime-400/90'}`}>
         {title}
       </h3>
       {description && (
-        <p className={`text-sm ${isActive ? 'text-gray-200' : 'text-gray-300/80'}`}>
+        <p className={`text-sm ${isActive || isPassed ? 'text-gray-200' : 'text-gray-300/80'}`}>
           {description}
         </p>
       )}
@@ -65,9 +73,10 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
 
 const FarmingCycleSupport: React.FC = () => {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
+  const [passedSteps, setPassedSteps] = useState<Set<number>>(new Set());
   const stepsContainerRef = useRef<HTMLDivElement>(null);
   
-  const steps: (Omit<FarmingStepProps, 'isLast' | 'isActive' | 'id'>) [] = [
+  const steps: (Omit<FarmingStepProps, 'isLast' | 'isActive' | 'isPassed' | 'id'>) [] = [
     {
       title: 'Farmer Onboarding',
       description: 'Complete registration and verification of beneficiary farmers onto the platform.'
@@ -95,6 +104,20 @@ const FarmingCycleSupport: React.FC = () => {
   ];
 
   useEffect(() => {
+    // Update passed steps when active step changes
+    setPassedSteps(prevPassedSteps => {
+      const newPassedSteps = new Set(prevPassedSteps);
+      
+      // Add all steps before the current active step
+      for (let i = 0; i < activeStepIndex; i++) {
+        newPassedSteps.add(i);
+      }
+      
+      return newPassedSteps;
+    });
+  }, [activeStepIndex]);
+
+  useEffect(() => {
     // Set up intersection observer
     const options = {
       root: null, // viewport
@@ -107,7 +130,11 @@ const FarmingCycleSupport: React.FC = () => {
         if (entry.isIntersecting) {
           // Extract index from the id
           const index = parseInt(entry.target.id.split('-')[1]);
-          setActiveStepIndex(index);
+          
+          // Update active step if it's further down than previous active step
+          setActiveStepIndex(currentActive => 
+            index > currentActive ? index : currentActive
+          );
         }
       });
     }, options);
@@ -143,6 +170,7 @@ const FarmingCycleSupport: React.FC = () => {
               description={step.description} 
               isLast={index === steps.length - 1}
               isActive={index === activeStepIndex}
+              isPassed={passedSteps.has(index)}
             />
           ))}
         </div>
