@@ -47,7 +47,7 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
   }, [isActive, isPassed]);
 
   return (
-    <div ref={stepRef} id={id} className="relative pl-6 pb-5">
+    <div ref={stepRef} id={id} className="relative pl-6 pb-10">
       {/* Timeline vertical line */}
       <div className={`absolute left-0 top-0 bottom-0 w-1 ${isActive || isPassed ? 'bg-lime-600' : 'bg-lime-400/5'}`}>
         {/* This ensures the line stops at the last item */}
@@ -62,7 +62,7 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
       <h3 className={`font-medium mb-1 ${isActive || isPassed ? 'text-lime-500 font-semibold' : 'text-lime-400/90'}`}>
         {title}
       </h3>
-      {description && (
+      {isActive && (
         <p className={`text-sm ${isActive || isPassed ? 'text-gray-200' : 'text-gray-300/80'}`}>
           {description}
         </p>
@@ -75,6 +75,7 @@ const FarmingCycleSupport: React.FC = () => {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [passedSteps, setPassedSteps] = useState<Set<number>>(new Set());
   const stepsContainerRef = useRef<HTMLDivElement>(null);
+  const lastActiveIndexRef = useRef(0);
   
   const steps: (Omit<FarmingStepProps, 'isLast' | 'isActive' | 'isPassed' | 'id'>) [] = [
     {
@@ -104,14 +105,30 @@ const FarmingCycleSupport: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Update passed steps when active step changes
+    // Determine scroll direction
+    const isScrollingDown = activeStepIndex > lastActiveIndexRef.current;
+    const isScrollingUp = activeStepIndex < lastActiveIndexRef.current;
+    
+    // Update passed steps based on scroll direction
     setPassedSteps(prevPassedSteps => {
       const newPassedSteps = new Set(prevPassedSteps);
       
-      // Add all steps before the current active step
-      for (let i = 0; i < activeStepIndex; i++) {
-        newPassedSteps.add(i);
+      if (isScrollingDown) {
+        // When scrolling down, add all steps before the active step
+        for (let i = 0; i < activeStepIndex; i++) {
+          newPassedSteps.add(i);
+        }
+      } else if (isScrollingUp) {
+        // When scrolling up, remove all steps after the active step
+        for (let i = activeStepIndex + 1; i <= lastActiveIndexRef.current; i++) {
+          newPassedSteps.delete(i);
+        }
+        // Also remove the current active step from passed steps
+        newPassedSteps.delete(activeStepIndex);
       }
+      
+      // Update the reference for next comparison
+      lastActiveIndexRef.current = activeStepIndex;
       
       return newPassedSteps;
     });
@@ -130,11 +147,7 @@ const FarmingCycleSupport: React.FC = () => {
         if (entry.isIntersecting) {
           // Extract index from the id
           const index = parseInt(entry.target.id.split('-')[1]);
-          
-          // Update active step if it's further down than previous active step
-          setActiveStepIndex(currentActive => 
-            index > currentActive ? index : currentActive
-          );
+          setActiveStepIndex(index);
         }
       });
     }, options);
