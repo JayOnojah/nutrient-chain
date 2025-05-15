@@ -49,9 +49,9 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
   return (
     <div ref={stepRef} id={id} className="relative pl-6 pb-10">
       {/* Timeline vertical line */}
-      <div className={`absolute left-0 top-0 bottom-0 w-1 ${isActive || isPassed ? 'bg-lime-600' : 'bg-lime-400/5'}`}>
+      <div className={`absolute left-0 top-0 ${isLast && isActive ? 'bottom-[4px]' : 'bottom-0'} w-1 ${isActive || isPassed ? 'bg-lime-600' : 'bg-lime-400/5'}`}>
         {/* This ensures the line stops at the last item */}
-        {isLast && <div className="absolute bottom-0 w-full h-1/2 bg-[#1a3409]"></div>}
+        {isLast && !isActive && <div className="absolute bottom-0 w-full h-1/2 bg-[#1a3409]"></div>}
       </div>
       
       {/* Centered ball at the end of ONLY the currently active item */}
