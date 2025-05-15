@@ -2,6 +2,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
+import SupportIMG1 from "@/public/images/pngs/support-mage (1).png"
+import SupportIMG2 from "@/public/images/pngs/support-mage (2).png"
+import SupportIMG3 from "@/public/images/pngs/support-mage (3).png"
+import SupportIMG4 from "@/public/images/pngs/support-mage (4).png"
+import SupportIMG5 from "@/public/images/pngs/support-mage (5).png"
+import SupportIMG6 from "@/public/images/pngs/support-mage (6).png"
 
 interface FarmingStepProps {
   title: string;
