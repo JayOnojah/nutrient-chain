@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
-import Navbar from "./Navbar";
-import {  Outfit } from "next/font/google";
 import Image from "next/image";
+import { Outfit } from "next/font/google";
+import Navbar from "./navbar";
+import TMImg from "@/public/images/svgs/tm.svg";
 
 const outFit = Outfit({
   weight: "700",
@@ -11,54 +11,12 @@ const outFit = Outfit({
 });
 
 const Banner = () => {
-  // const [email, setEmail] = useState<string>("");
-
-  //   const [loading, setLoading] = useState<boolean>(false);
-
-  //   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     setEmail(e.target.value);
-  //   };
-
-  //   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-  //     setLoading(true);
-
-  //     const response = await fetch(
-  //       "https://api.sheetmonkey.io/form/6HEBpMVkkNCqWcun1SJQrK",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ email }),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       toast.success("Email successfully added to Waitlist", {
-  //         action: {
-  //           label: "Close",
-  //           onClick: () => toast.dismiss(),
-  //         },
-  //       });
-  //       setEmail("");
-  //     } else {
-  //       toast.error("Error adding email to Waitlist", {
-  //         action: {
-  //           label: "Close",
-  //           onClick: () => toast.dismiss(),
-  //         },
-  //       });
-  //     }
-
-  //     setLoading(false);
-  //   };
   return (
     <div className="bg-[#0D2200] pb-10">
       <Navbar />
       <div className="app-width pt-32 w-full mx-auto py-5 flex">
         <div className="text-white">
-          <div className="flex justify-between">
+          <div className="flex gap-10 items-center justify-between">
             <div>
               <div
                 className={`${outFit.className} antialiased text-[35px] lg:text-[56px] max-w-[846px]  word-spacing`}
@@ -73,6 +31,13 @@ const Banner = () => {
                 future where Africa feeds the world.
               </div>
             </div>
+            <Image
+              src={TMImg}
+              height={100}
+              width={100}
+              alt="famers trade mark"
+              className="hidden lg:inline"
+            />
           </div>
 
           <div className="mt-5 flex gap-4">

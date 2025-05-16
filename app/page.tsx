@@ -1,9 +1,12 @@
 import { Fragment } from "react";
-import Banner from "@/components/Banner";
-import Mission from "@/components/Mission";
-import Growth from "@/components/Growth";
-import FarmingCycleSupport from "@/components/FarmingCycleSupport";
-import FeaturesSection from "@/components/FeaturesSection";
+import FarmingCycleSupport from "@/components/farming-cycle-support";
+import FeaturesSection from "@/components/features-section";
+import Banner from "@/components/banner";
+import Mission from "@/components/mission";
+import Growth from "@/components/growth";
+import NewsletterSubscription from "@/components/news-letter";
+import Footer from "@/components/footer";
+import FaqSection from "@/components/faq";
 
 const HomePage = () => {
   return (
@@ -13,6 +16,9 @@ const HomePage = () => {
       <Growth />
       <FarmingCycleSupport />
       <FeaturesSection />
+      <FaqSection />
+      <NewsletterSubscription />
+      <Footer />
     </Fragment>
   );
 };
