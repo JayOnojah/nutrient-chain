@@ -109,7 +109,7 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
           }`}
         >
           <Link
-            href="/services"
+            href="/#"
             className={`transition-all duration-100 hover:scale-95 hover:border-b ${
               pathname === "/services" && "border-b"
             }`}
@@ -125,7 +125,7 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
             Contact Us
           </Link>
           <Link
-            href="/blog"
+            href="/#"
             className={`transition-all duration-100 hover:scale-95 hover:border-b ${
               pathname === "/blog" && "border-b"
             }`}
@@ -169,11 +169,13 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
 
             {/* Menu Items */}
             <div className="flex flex-col mt-10 space-y-6 text-black font-semibold text-xl w-full">
-              {["Services", "Pricing", "Our Portfolio", "Blog"].map(
+              {["About Us","  Contact Us", "Our Blog"].map(
                 (item, index) => (
                   <Link
                     key={item}
-                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    // href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    href={"/#"}
+                    onClick={() => setIsOpen(false)}
                     className="border-b border-black pb-2"
                     ref={(el: HTMLAnchorElement | null) => {
                       if (el) menuItemsRef.current[index] = el;

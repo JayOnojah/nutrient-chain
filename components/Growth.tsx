@@ -54,7 +54,7 @@ const Growth = () => {
           <div className="flex-1 grid gap-4 sm:grid-cols-2">
             {data.map((item, index) => (
               <div className="w-full flex flex-col items-center text-center">
-                <div className={`${outFit.className} text-[66px]`}>{item.amt}</div>
+                <div className={`${outFit.className} text-[44px] lg:text-[66px]`}>{item.amt}</div>
                 <div className="text-lg font-semibold text-[#070B05]">{item.title}</div>
                 <div className="mt-2 text-gray-500">{item.text}</div>
               </div>
