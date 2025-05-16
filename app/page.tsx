@@ -7,6 +7,8 @@ import Growth from "@/components/growth";
 import NewsletterSubscription from "@/components/news-letter";
 import Footer from "@/components/footer";
 import FaqSection from "@/components/faq";
+import HowItWorks from "@/components/how-it-works";
+import BuiltDifferently from "@/components/built-differently";
 
 const HomePage = () => {
   return (
@@ -16,6 +18,8 @@ const HomePage = () => {
       <Growth />
       <FarmingCycleSupport />
       <FeaturesSection />
+      <BuiltDifferently />
+      <HowItWorks />
       <FaqSection />
       <NewsletterSubscription />
       <Footer />

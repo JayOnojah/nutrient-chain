@@ -1,6 +1,12 @@
 "use client"
 
+import { Outfit } from "next/font/google";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion"
+
+const outFit = Outfit({
+  weight: "700",
+  subsets: ["latin"],
+});
 
 export default function FaqSection() {
   const faqItems = [
@@ -38,7 +44,7 @@ export default function FaqSection() {
 
   return (
     <div className="app-width flex flex-col md:flex-row gap-10 py-12 px-4">
-      <h2 className="text-3xl font-bold mb-8 w-1/3">FAQs</h2>
+      <h2 className={`text-2xl sm:text-3xl font-bold mb-8 w-1/3 ${outFit.className}`}>FAQs</h2>
       <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
         {faqItems.map((item, index) => (
           <AccordionItem key={index} value={`item-${index}`} className="border-b">
