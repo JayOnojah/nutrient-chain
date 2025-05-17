@@ -89,15 +89,15 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
   return (
     <div
       className={`px-5 ${
-        theme === "dark" ? `${scrolled && "bg-[#0D2200]"}` : "bg-cyclers-primary"
-      } fixed w-full top-0 z-30`}
-    >
+        theme === "dark"
+          ? `${scrolled && "bg-[#0D2200]"}`
+          : "bg-cyclers-primary"
+      } fixed w-full top-0 z-30`}>
       <nav className="app-width mx-auto bg-transparent w-full py-6 flex justify-between items-center relative">
         <div className="md:w-[20%]">
           <Link
             href="/"
-            className="transition-all duration-300 hover:scale-105 cursor-pointer "
-          >
+            className="transition-all duration-300 hover:scale-105 cursor-pointer ">
             <Image src={Logo} height={24} width={60} alt="cycler studios" />
           </Link>
         </div>
@@ -106,36 +106,31 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
         <div
           className={`hidden md:flex items-center space-x-8 font-semibold ${
             theme === "dark" ? "text-white" : "text-black"
-          }`}
-        >
+          }`}>
           <Link
             href="/#"
             className={`transition-all duration-100 hover:scale-95 hover:border-b ${
               pathname === "/services" && "border-b"
-            }`}
-          >
+            }`}>
             About Us
           </Link>
           <Link
             href="/portfolio"
             className={`transition-all duration-100 hover:scale-95 hover:border-b ${
               pathname === "/portfolio" && "border-b"
-            }`}
-          >
+            }`}>
             Contact Us
           </Link>
           <Link
             href="/#"
             className={`transition-all duration-100 hover:scale-95 hover:border-b ${
               pathname === "/blog" && "border-b"
-            }`}
-          >
+            }`}>
             Our Blog
           </Link>
           <a
             href="mailto:hi@nutrientchain.com"
-            className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full hover:bg-[#496912]"
-          >
+            className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full hover:bg-[#496912]">
             Join the mission
           </a>
         </div>
@@ -145,55 +140,48 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
           className={`md:hidden ${
             theme === "dark" ? "text-white" : "text-black"
           } hover:scale-105 transition-all duration-300`}
-          onClick={handleMobileButton}
-        >
+          onClick={handleMobileButton}>
           <MenuIcon />
         </button>
 
         {/* Mobile Menu Overlay */}
         <div
           ref={menuRef}
-          className="fixed top-0 left-0 w-full h-full bg-white justify-between flex flex-col items-start p-6 transform -translate-x-full -translate-y-full opacity-0 z-50"
-        >
+          className="fixed top-0 left-0 w-full h-full bg-white justify-between flex flex-col items-start p-6 transform -translate-x-full -translate-y-full opacity-0 z-50">
           <div className="w-full">
             <div className="w-full flex justify-between gap-10 mt-4">
               <Image src={Logo} height={24} width={64} alt="cycler studios" />
               {/* Close Button */}
               <button
                 className="self-end text-black"
-                onClick={() => setIsOpen(false)}
-              >
+                onClick={() => setIsOpen(false)}>
                 <X size={28} />
               </button>
             </div>
 
             {/* Menu Items */}
             <div className="flex flex-col mt-10 space-y-6 text-black font-semibold text-xl w-full">
-              {["About Us","  Contact Us", "Our Blog"].map(
-                (item, index) => (
-                  <Link
-                    key={item}
-                    // href={`/${item.toLowerCase().replace(" ", "-")}`}
-                    href={"/#"}
-                    onClick={() => setIsOpen(false)}
-                    className="border-b border-black pb-2"
-                    ref={(el: HTMLAnchorElement | null) => {
-                      if (el) menuItemsRef.current[index] = el;
-                    }}
-                  >
-                    {item}
-                  </Link>
-                )
-              )}
+              {["About Us", "  Contact Us", "Our Blog"].map((item, index) => (
+                <Link
+                  key={item}
+                  // href={`/${item.toLowerCase().replace(" ", "-")}`}
+                  href={"/#"}
+                  onClick={() => setIsOpen(false)}
+                  className="border-b border-black pb-2"
+                  ref={(el: HTMLAnchorElement | null) => {
+                    if (el) menuItemsRef.current[index] = el;
+                  }}>
+                  {item}
+                </Link>
+              ))}
             </div>
           </div>
 
           {/* Button */}
           <button
             className="mt-10 w-full bg-black text-white py-3 rounded-md font-semibold shadow-lg hover:bg-gray-800 transition"
-            onClick={handleMobileButton}
-          >
-            Book A Session
+            onClick={handleMobileButton}>
+            Join the Misson
           </button>
         </div>
       </nav>
