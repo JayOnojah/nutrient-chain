@@ -20,19 +20,15 @@ const Banner = () => {
             <div>
               <div
                 className={`${outFit.className} antialiased text-[35px] lg:text-[56px] max-w-[846px]  word-spacing`}>
-                Empowering African{" "}
-                <span className="text-[#74B700]">Farmers</span>. Nourishing the
-                World.
+                Empowering African Farmers.{" "}
+                <span className="text-[#74B700]">Nourishing the World.</span>
               </div>
               <div className="max-w-[700px] mt-2 text-[14px] lg:text-[16px] tracking-tighter word-spacing">
-                {/* We are unlocking prosperity for African farmers through
-                blockchain, fintech, and data-driven agriculture. We connect
-                farmers directly to markets, financing, and advanced
-                agricultural data through blockchain and FinTech—creating a
-                future where Africa feeds the world. */}
-                We use technology to empower smallholder farmers in Africa with
-                access to finance, data-driven best practices, and access to
-                local & global markets — driving food security for all.
+                We are unlocking prosperity for African farmers through
+                blockchain, fintech, and data-driven agriculture. We use
+                technology to empower smallholder farmers in Africa with access
+                to finance, data-driven best practices, and access to local &
+                global markets — driving food security for all.
               </div>
             </div>
             <Image
