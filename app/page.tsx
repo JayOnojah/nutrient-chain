@@ -9,6 +9,7 @@ import Footer from "@/components/footer";
 import FaqSection from "@/components/faq";
 import HowItWorks from "@/components/how-it-works";
 import BuiltDifferently from "@/components/built-differently";
+import FarmingCycleSupportSmall from "@/components/farming-cycle-support-small";
 
 const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
       <Mission />
       <Growth />
       <FarmingCycleSupport />
+      <FarmingCycleSupportSmall />
       <FeaturesSection />
       <BuiltDifferently />
       <HowItWorks />
