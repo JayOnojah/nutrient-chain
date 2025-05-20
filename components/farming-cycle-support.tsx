@@ -53,12 +53,13 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
   }, [isActive, isPassed]);
 
   return (
-    <div ref={stepRef} id={id} className="relative pl-6 pb-10">
+    <div ref={stepRef} id={id} className="relative pl-6 pb-8">
       {/* Timeline vertical line */}
       <div
         className={`absolute left-0 top-0 ${
           isLast && isActive ? "bottom-[4px]" : "bottom-0"
-        } w-1 ${isActive || isPassed ? "bg-lime-600" : "bg-lime-400/5"}`}>
+        } w-1 ${isActive || isPassed ? "bg-lime-600" : "bg-lime-400/5"}`}
+      >
         {/* This ensures the line stops at the last item */}
         {isLast && !isActive && (
           <div className="absolute bottom-0 w-full h-1/2 bg-[#1a3409]"></div>
@@ -75,14 +76,16 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
           isActive || isPassed
             ? "text-lime-500 font-semibold"
             : "text-lime-400/90"
-        }`}>
+        }`}
+      >
         {title}
       </h3>
       {isActive && (
         <p
           className={`text-sm ${
             isActive || isPassed ? "text-gray-200" : "text-gray-300/80"
-          }`}>
+          }`}
+        >
           {description}
         </p>
       )}
@@ -93,9 +96,16 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
 const FarmingCycleSupport: React.FC = () => {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [passedSteps, setPassedSteps] = useState<Set<number>>(new Set());
+  const [isSticky, setIsSticky] = useState(false);
+  const [hasCompletedScroll, setHasCompletedScroll] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const stepsContainerRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const lastActiveIndexRef = useRef(0);
+  const contentHeight = useRef(0);
+  const stickyTriggerPoint = useRef(0);
+  const stickyEndPoint = useRef(0);
 
   const steps: (Omit<
     FarmingStepProps,
@@ -116,7 +126,7 @@ const FarmingCycleSupport: React.FC = () => {
     {
       title: "Input Distribution",
       description:
-        "We deliver quality inputs (seeds, fertilizers, tools) at scale, tracked digitally and linked to each farmer’s record for transparency.",
+        "We deliver quality inputs (seeds, fertilizers, tools) at scale, tracked digitally and linked to each farmer's record for transparency.",
       image: SupportIMG3,
     },
     {
@@ -138,6 +148,75 @@ const FarmingCycleSupport: React.FC = () => {
       image: SupportIMG6,
     },
   ];
+
+  // Calculate dimensions and scroll points
+  useEffect(() => {
+    if (sectionRef.current && contentRef.current) {
+      // Store content height for positioning
+      contentHeight.current = contentRef.current.offsetHeight;
+
+      // Calculate trigger points for sticky behavior
+      const rect = sectionRef.current.getBoundingClientRect();
+      stickyTriggerPoint.current = window.scrollY + rect.top;
+
+      // Calculate a more reasonable scroll distance
+      // Each step gets a portion of the viewport height (adjusted for better pacing)
+      const scrollPerStep = window.innerHeight * 0.3; // 30% of viewport per step
+      const totalScrollDistance = scrollPerStep * steps.length;
+
+      stickyEndPoint.current = stickyTriggerPoint.current + totalScrollDistance;
+
+      // Set section height to accommodate the scroll distance plus content height
+      sectionRef.current.style.height = `${
+        totalScrollDistance + contentHeight.current
+      }px`;
+    }
+  }, [steps.length]);
+
+  // Handle scroll to determine sticky state
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      // Start sticky mode when scrolling past the trigger point
+      if (
+        scrollY >= stickyTriggerPoint.current &&
+        scrollY < stickyEndPoint.current
+      ) {
+        setIsSticky(true);
+        setHasCompletedScroll(false);
+      }
+      // End sticky mode after scrolling past end point
+      else if (scrollY >= stickyEndPoint.current) {
+        setIsSticky(false);
+        setHasCompletedScroll(true);
+      }
+      // Before sticky section
+      else {
+        setIsSticky(false);
+        setHasCompletedScroll(false);
+      }
+
+      // Calculate which step should be active based on scroll position
+      if (isSticky) {
+        const scrollProgress =
+          (scrollY - stickyTriggerPoint.current) /
+          (stickyEndPoint.current - stickyTriggerPoint.current);
+        const stepIndex = Math.min(
+          Math.floor(scrollProgress * steps.length),
+          steps.length - 1
+        );
+        setActiveStepIndex(stepIndex);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Initial call to set correct state
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isSticky, steps.length]);
 
   useEffect(() => {
     // Determine scroll direction
@@ -187,80 +266,61 @@ const FarmingCycleSupport: React.FC = () => {
     }
   }, [activeStepIndex]);
 
-  useEffect(() => {
-    // Set up intersection observer
-    const options = {
-      root: null, // viewport
-      rootMargin: "-30% 0px -60% 0px", // consider elements 30% from top of viewport
-      threshold: 0.1, // trigger when 10% of the target is visible
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Extract index from the id
-          const index = parseInt(entry.target.id.split("-")[1]);
-          setActiveStepIndex(index);
-        }
-      });
-    }, options);
-
-    // Observe all step elements
-    if (stepsContainerRef.current) {
-      const stepElements =
-        stepsContainerRef.current.querySelectorAll('[id^="step-"]');
-      stepElements.forEach((element) => {
-        observer.observe(element);
-      });
-    }
-
-    return () => {
-      // Clean up
-      observer.disconnect();
-    };
-  }, []);
-
   // Get the current active image
   const activeImage = steps[activeStepIndex]?.image;
 
   return (
-    <div className=" bg-[#1a3409] text-white p-8 md:p-12">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-semibold mb-10 text-center">
-          We Support Every Step
-          <br />
-          of the Farming Cycle
-        </h2>
-        <div className="flex flex-col md:flex-row">
-          <div className="flex-1 md:pr-8 mb-8 md:mb-0">
-            <div
-              ref={stepsContainerRef}
-              className="flex max-w-[430px] flex-col pr-2">
-              {steps.map((step, index) => (
-                <FarmingStep
-                  key={index}
-                  id={`step-${index}`}
-                  title={step.title}
-                  description={step.description}
-                  isLast={index === steps.length - 1}
-                  isActive={index === activeStepIndex}
-                  isPassed={passedSteps.has(index)}
-                />
-              ))}
+    <div ref={sectionRef} className="hidden md:block relative bg-[#1a3409]">
+      {/* Content container - will be fixed during scroll */}
+      <div
+        ref={contentRef}
+        className={`${
+          isSticky
+            ? "fixed top-0 left-0 right-0"
+            : hasCompletedScroll
+            ? "absolute bottom-0 left-0 right-0"
+            : ""
+        } text-white p-8 md:p-12 bg-[#1a3409] z-10`}
+      >
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-semibold mb-10 text-center">
+            We Support Every Step
+            <br />
+            of the Farming Cycle
+          </h2>
+          <div className="flex flex-col md:flex-row">
+            <div className="flex-1 md:pr-8 mb-8 md:mb-0">
+              <div
+                ref={stepsContainerRef}
+                className="flex max-w-[430px] flex-col pr-2"
+              >
+                {steps.map((step, index) => (
+                  <FarmingStep
+                    key={index}
+                    id={`step-${index}`}
+                    title={step.title}
+                    description={step.description}
+                    isLast={index === steps.length - 1}
+                    isActive={index === activeStepIndex}
+                    isPassed={passedSteps.has(index)}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="flex-1 flex justify-center items-center">
-            <div
-              ref={imageContainerRef}
-              className="w-[280px] h-[280px] md:w-[350px] md:h-[350px] rounded-full overflow-hidden">
-              <Image
-                src={activeImage}
-                alt={`${steps[activeStepIndex]?.title} illustration`}
-                width={400}
-                height={400}
-                className="w-full h-full object-cover"
-              />
+            <div className="flex-1 flex justify-center items-center">
+              <div
+                ref={imageContainerRef}
+                className="w-[280px] h-[280px] md:w-[350px] md:h-[350px] rounded-full overflow-hidden"
+              >
+                <Image
+                  src={activeImage}
+                  alt={`${steps[activeStepIndex]?.title} illustration`}
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
