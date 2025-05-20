@@ -54,9 +54,10 @@ const HowItWorks = () => {
       <div className="app-width min-h-dvh flex flex-col items-center text-white justify-center">
         <div className="max-w-[500px] mx-auto text-center">
           <div className={`${outFit.className} text-[#74B601] text-xl`}>
-            How it works
+            How it Works
           </div>
-          <div className="mt-3 text-white text-[32px] md:text-[40px]">
+          <div
+            className={`${outFit.className} mt-3 text-white text-[32px] md:text-[40px]`}>
             Simple Steps to Smarter Farming
           </div>
         </div>

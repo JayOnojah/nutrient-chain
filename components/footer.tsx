@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { Twitter, Linkedin, Facebook, Instagram } from "lucide-react";
-import Logo from "@/public/images/svgs/logo.svg";
 import Image from "next/image";
+import Logo from "@/public/images/svgs/logo.svg";
+import { Twitter, Linkedin, Facebook, Instagram } from "lucide-react";
 
 export default function Footer() {
   return (

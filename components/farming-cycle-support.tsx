@@ -1,4 +1,6 @@
 "use client";
+
+import { Outfit } from "next/font/google";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
@@ -8,6 +10,11 @@ import SupportIMG3 from "@/public/images/pngs/support-mage (3).png";
 import SupportIMG4 from "@/public/images/pngs/support-mage (4).png";
 import SupportIMG5 from "@/public/images/pngs/support-mage (5).png";
 import SupportIMG6 from "@/public/images/pngs/support-mage (6).png";
+
+const outFit = Outfit({
+  weight: "700",
+  subsets: ["latin"],
+});
 
 interface FarmingStepProps {
   title: string;
@@ -58,8 +65,7 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
       <div
         className={`absolute left-0 top-0 ${
           isLast && isActive ? "bottom-[4px]" : "bottom-0"
-        } w-1 ${isActive || isPassed ? "bg-lime-600" : "bg-lime-400/5"}`}
-      >
+        } w-1 ${isActive || isPassed ? "bg-lime-600" : "bg-lime-400/5"}`}>
         {/* This ensures the line stops at the last item */}
         {isLast && !isActive && (
           <div className="absolute bottom-0 w-full h-1/2 bg-[#1a3409]"></div>
@@ -76,16 +82,14 @@ const FarmingStep: React.FC<FarmingStepProps> = ({
           isActive || isPassed
             ? "text-lime-500 font-semibold"
             : "text-lime-400/90"
-        }`}
-      >
+        }`}>
         {title}
       </h3>
       {isActive && (
         <p
           className={`text-sm ${
             isActive || isPassed ? "text-gray-200" : "text-gray-300/80"
-          }`}
-        >
+          }`}>
           {description}
         </p>
       )}
@@ -280,10 +284,10 @@ const FarmingCycleSupport: React.FC = () => {
             : hasCompletedScroll
             ? "absolute bottom-0 left-0 right-0"
             : ""
-        } text-white p-8 md:p-12 bg-[#1a3409] z-10`}
-      >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-semibold mb-10 text-center">
+        } text-white p-8 md:p-12 pt-12 md:pt-36 bg-[#1a3409] z-10`}>
+        <div className="max-w-5xl mx-auto">
+          <h2
+            className={`${outFit.className} text-4xl font-semibold mb-10 text-center`}>
             We Support Every Step
             <br />
             of the Farming Cycle
@@ -292,8 +296,7 @@ const FarmingCycleSupport: React.FC = () => {
             <div className="flex-1 md:pr-8 mb-8 md:mb-0">
               <div
                 ref={stepsContainerRef}
-                className="flex max-w-[430px] flex-col pr-2"
-              >
+                className="flex max-w-[430px] flex-col pl-5">
                 {steps.map((step, index) => (
                   <FarmingStep
                     key={index}
@@ -311,8 +314,7 @@ const FarmingCycleSupport: React.FC = () => {
             <div className="flex-1 flex justify-center items-center">
               <div
                 ref={imageContainerRef}
-                className="w-[280px] h-[280px] md:w-[350px] md:h-[350px] rounded-full overflow-hidden"
-              >
+                className="w-[280px] h-[280px] md:w-[350px] md:h-[350px] rounded-full overflow-hidden">
                 <Image
                   src={activeImage}
                   alt={`${steps[activeStepIndex]?.title} illustration`}
