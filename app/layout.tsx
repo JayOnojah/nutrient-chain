@@ -5,8 +5,9 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NutrientChain: The SuperApp for Farmers",
-  description: "Re-thinking Agriculture without Boundaries in Africa",
+  title: "NutrientChain: Empowering African Farmers. Nourishing the World.",
+  description:
+    "We are unlocking prosperity for African farmers through blockchain, fintech, and data-driven agriculture. We use technology to empower smallholder farmers in Africa with access to finance, data-driven best practices, and access to local & global markets — driving food security for all.",
 };
 
 const inter = Inter({
