@@ -118,36 +118,36 @@ const FarmingCycleSupportSmall: FC = () => {
     goToStep(activeStepIndex - 1);
   }, [goToStep, activeStepIndex]);
 
-  useEffect(() => {
-    const startAutoPlay = () => {
-      autoPlayRef.current = setInterval(() => {
-        goToStep((activeStepIndex + 1) % steps.length);
-      }, 5000);
-    };
+  // useEffect(() => {
+  //   const startAutoPlay = () => {
+  //     autoPlayRef.current = setInterval(() => {
+  //       goToStep((activeStepIndex + 1) % steps.length);
+  //     }, 5000);
+  //   };
 
-    const stopAutoPlay = () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current);
-        autoPlayRef.current = null;
-      }
-    };
+  //   const stopAutoPlay = () => {
+  //     if (autoPlayRef.current) {
+  //       clearInterval(autoPlayRef.current);
+  //       autoPlayRef.current = null;
+  //     }
+  //   };
 
-    startAutoPlay();
+  //   startAutoPlay();
 
-    const handleInteraction = () => {
-      stopAutoPlay();
-      setTimeout(startAutoPlay, 10000);
-    };
+  //   const handleInteraction = () => {
+  //     stopAutoPlay();
+  //     setTimeout(startAutoPlay, 10000);
+  //   };
 
-    window.addEventListener("click", handleInteraction);
-    window.addEventListener("touchstart", handleInteraction);
+  //   window.addEventListener("click", handleInteraction);
+  //   window.addEventListener("touchstart", handleInteraction);
 
-    return () => {
-      stopAutoPlay();
-      window.removeEventListener("click", handleInteraction);
-      window.removeEventListener("touchstart", handleInteraction);
-    };
-  }, [goToStep, activeStepIndex, steps.length]);
+  //   return () => {
+  //     stopAutoPlay();
+  //     window.removeEventListener("click", handleInteraction);
+  //     window.removeEventListener("touchstart", handleInteraction);
+  //   };
+  // }, [goToStep, activeStepIndex, steps.length]);
 
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
