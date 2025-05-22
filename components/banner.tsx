@@ -61,30 +61,6 @@ const Banner = () => {
               alt="Nutrient chain"
             />
           </div>
-
-          {/* <form
-            onSubmit={handleSubmit}
-            className="max-w-[450px] mt-[50px] flex justify-between bg-white w-full pl-4 p-1.5 rounded-full"
-          >
-            <input
-              required
-              onChange={handleChange}
-              name="email"
-              type="email"
-              value={email}
-              placeholder="Enter your email"
-              className="flex-1 outline-none text-black px-2 py-1 max-w-[60%] block"
-            />
-            <button
-              type="submit"
-              disabled={loading}
-              className={`py-[2px] lg:py-[6px] px-[10px] lg:px-[22px] rounded-full text-[12px] lg:text-[14px] max-w-[40%] block hover:bg-[#496912] ${
-                loading ? "bg-[#496912]" : "bg-[#74B700]"
-              }`}
-            >
-              {loading ? "Processing..." : "Join Waitlist"}{" "}
-            </button>
-          </form> */}
         </div>
       </div>
     </div>
