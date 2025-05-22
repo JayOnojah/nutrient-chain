@@ -19,7 +19,8 @@ const Banner = () => {
           <div className="flex gap-10 items-center justify-between">
             <div>
               <div
-                className={`${outFit.className} antialiased text-[35px] lg:text-[56px] max-w-[846px]  word-spacing`}>
+                className={`${outFit.className} antialiased text-[35px] lg:text-[56px] max-w-[846px]  word-spacing`}
+              >
                 Empowering African Farmers.{" "}
                 <span className="text-[#74B700]">Nourishing the World.</span>
               </div>
@@ -31,24 +32,28 @@ const Banner = () => {
                 global markets — driving food security for all.
               </div>
             </div>
-            <Image
-              src={TMImg}
-              height={100}
-              width={100}
-              alt="famers trade mark"
-              className="hidden lg:inline"
-            />
+            <div className="my-slow-spinner">
+              <Image
+                src={TMImg}
+                height={100}
+                width={100}
+                alt="famers trade mark"
+                className="hidden lg:inline"
+              />
+            </div>
           </div>
 
           <div className="mt-5 flex gap-4">
             <a
               href="mailto:hi@nutrientchain.com"
-              className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full hover:bg-[#496912] transition-all duration-300">
+              className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] bg-[#74B700] rounded-full hover:bg-[#496912] transition-all duration-300"
+            >
               Join the mission
             </a>
             <a
               href="mailto:hi@nutrientchain.com"
-              className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] text-[#74B700] bg-white hover:bg-[#74B700] rounded-full hover:text-white transition-all duration-300">
+              className="py-[8px] lg:py-[10px] text-xs lg:text-[14px] px-3 md:px-[22px] text-[#74B700] bg-white hover:bg-[#74B700] rounded-full hover:text-white transition-all duration-300"
+            >
               Learn more
             </a>
           </div>
