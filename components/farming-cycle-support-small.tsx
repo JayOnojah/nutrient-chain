@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback, FC } from "react";
-import Image from "next/image";
+
 import { gsap } from "gsap";
+import Image from "next/image";
 import SupportIMG1 from "@/public/images/pngs/support-mage (1).png";
 import SupportIMG2 from "@/public/images/pngs/support-mage (2).png";
 import SupportIMG3 from "@/public/images/pngs/support-mage (3).png";
@@ -11,12 +12,11 @@ import SupportIMG5 from "@/public/images/pngs/support-mage (5).png";
 import SupportIMG6 from "@/public/images/pngs/support-mage (6).png";
 
 const FarmingCycleSupportSmall: FC = () => {
-  const [activeStepIndex, setActiveStepIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
-  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   const steps = [
     {
@@ -117,37 +117,6 @@ const FarmingCycleSupportSmall: FC = () => {
   const prevStep = useCallback(() => {
     goToStep(activeStepIndex - 1);
   }, [goToStep, activeStepIndex]);
-
-  // useEffect(() => {
-  //   const startAutoPlay = () => {
-  //     autoPlayRef.current = setInterval(() => {
-  //       goToStep((activeStepIndex + 1) % steps.length);
-  //     }, 5000);
-  //   };
-
-  //   const stopAutoPlay = () => {
-  //     if (autoPlayRef.current) {
-  //       clearInterval(autoPlayRef.current);
-  //       autoPlayRef.current = null;
-  //     }
-  //   };
-
-  //   startAutoPlay();
-
-  //   const handleInteraction = () => {
-  //     stopAutoPlay();
-  //     setTimeout(startAutoPlay, 10000);
-  //   };
-
-  //   window.addEventListener("click", handleInteraction);
-  //   window.addEventListener("touchstart", handleInteraction);
-
-  //   return () => {
-  //     stopAutoPlay();
-  //     window.removeEventListener("click", handleInteraction);
-  //     window.removeEventListener("touchstart", handleInteraction);
-  //   };
-  // }, [goToStep, activeStepIndex, steps.length]);
 
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
