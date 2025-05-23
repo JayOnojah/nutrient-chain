@@ -40,26 +40,32 @@ const data = [
 
 const sdgData = [
   {
+    tag: "1",
     title: "No Pverty",
     img: PovertyImg,
   },
   {
+    tag: "2",
     title: "ZERO HUNGER",
     img: ZeroHungerImg,
   },
   {
+    tag: "3",
     title: "Good Health",
     img: GoodHealtImg,
   },
   {
+    tag: "5",
     title: "Gender Equality",
     img: GenderEqaulityImg,
   },
   {
+    tag: "13",
     title: "Climate Action",
     img: ClimateImg,
   },
   {
+    tag: "14",
     title: "Life Below Water",
     img: LifeBelowWater,
   },
@@ -110,10 +116,10 @@ const Growth = () => {
           <div className="flex-1 flex gap-4 flex-wrap">
             {sdgData.map((item, index) => (
               <div
-                key="index"
+                key={index}
                 className="bg-[#74B601] rounded-xl py-4 px-2 max-w-[110px] w-full">
                 <div className="flex uppercase text-white text-xs max-w-[50px]">
-                  <div>{index + 1}. </div>
+                  <div>{item.tag}. </div>
                   <div> {item.title}</div>
                 </div>
                 <div className="mt-3">
