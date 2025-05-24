@@ -89,10 +89,8 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
   // theme === "dark" ? `${scrolled && "bg-black"}` : "bg-cyclers-primary"
   return (
     <div
-      className={`px-5 ${
-        theme === "dark"
-          ? `${scrolled && "bg-[#0D2200]"}`
-          : "bg-cyclers-primary"
+      className={`md:px-5 ${
+        theme === "dark" ? `${scrolled && "bg-[#0D2200]"}` : "bg-white"
       } fixed w-full top-0 z-30`}
     >
       <nav className="app-width mx-auto bg-transparent w-full py-6 flex justify-between items-center relative">
@@ -123,7 +121,8 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
           <Link
             href="/contact-us"
             className={`transition-all duration-100 hover:scale-95 hover:border-b ${
-              pathname === "/contact-us" && `border-b ${theme === "dark" ? "" : "text-[#74B601]"}`
+              pathname === "/contact-us" &&
+              `border-b ${theme === "dark" ? "" : "text-[#74B601]"}`
             }`}
           >
             Contact Us
@@ -131,7 +130,8 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
           <Link
             href="/our-blog"
             className={`transition-all duration-100 hover:scale-95 hover:border-b ${
-              pathname === "/our-blog" && `border-b ${theme === "dark" ? "" : "text-[#74B601]"}`
+              pathname === "/our-blog" &&
+              `border-b ${theme === "dark" ? "" : "text-[#74B601]"}`
             }`}
           >
             Our Blog
