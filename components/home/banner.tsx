@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Outfit } from "next/font/google";
-import Navbar from "./navbar";
+import Navbar from "../navbar";
 import TMImg from "@/public/images/svgs/tm.svg";
 
 const outFit = Outfit({
