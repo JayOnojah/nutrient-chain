@@ -130,7 +130,7 @@ const Navbar = ({ theme = "dark" }: NavProps) => {
           <Link
             href="/our-blog"
             className={`transition-all duration-100 hover:scale-95 hover:border-b ${
-              pathname === "/our-blog" &&
+              pathname.startsWith("/our-blog") &&
               `border-b ${theme === "dark" ? "" : "text-[#74B601]"}`
             }`}
           >

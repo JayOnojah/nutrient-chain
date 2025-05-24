@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Clock4Icon } from "lucide-react";
 import { shortenText } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Link from "next/link";
 
 const BlogCard = () => {
   const text = `Access to digital tools shouldn't depend on smartphones.
@@ -13,7 +14,7 @@ const BlogCard = () => {
   const targetLength = 100;
 
   return (
-    <div className="w-full">
+    <Link href={`/our-blog/single-blog`} className="w-full">
       <Image
         src={BlogImg}
         width={290}
@@ -22,7 +23,7 @@ const BlogCard = () => {
         className="w-full"
       />
       <div className="flex items-center justify-between gap-4 mt-3 text-xs">
-        <div className="text-[#74B601] px-2 pt-1 bg-[#F2FEDC]">
+        <div className="text-[#74B601] rounded px-2 pt-1 bg-[#F2FEDC]">
           InclusiveAgritech
         </div>
         <div className="flex items-center gap-2 text-[#656565]">
@@ -46,7 +47,7 @@ const BlogCard = () => {
         </Avatar>
         <div className="text-sm text-[#656565]">By Jeremiah</div>
       </div>
-    </div>
+    </Link>
   );
 };
 
