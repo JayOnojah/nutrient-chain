@@ -83,7 +83,7 @@ const Page = () => {
                 wrong with your topic.
               </div>
             </div>
-            
+
             <div>
               <div className={`${outFit.className} text-2xl mt-4`}>
                 Creating a Memorable Brand Identity
